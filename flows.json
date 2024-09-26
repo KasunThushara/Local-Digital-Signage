@@ -1,0 +1,90 @@
+[
+    {
+        "id": "59271fc86875cce7",
+        "type": "function",
+        "z": "52f81779ae177af1",
+        "name": "function 8",
+        "func": "var click_event = global.get(\"click_event\");\nvar temp=true;\n\nif (msg.payload === \"\") {\n    // No process was found, now check click_event\n    if (click_event === true) {\n        temp = true;\n    } else {\n        temp = false;\n    }\n} else {\n    // Process found, you can do something else here\n    temp = false;\n}\n\nmsg.payload=temp;\n\nif (temp===true){\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1040,
+        "wires": [
+            [
+                "d8abd846cd12c7ed",
+                "dbee7515923c3305"
+            ]
+        ]
+    },
+    {
+        "id": "de7583e06da37fab",
+        "type": "exec",
+        "z": "52f81779ae177af1",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "bash",
+        "x": 290,
+        "y": 940,
+        "wires": [
+            [
+                "59271fc86875cce7"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6e4d1fedac275880",
+        "type": "inject",
+        "z": "52f81779ae177af1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "bash -c \"pgrep --full \"testPID\"\"",
+        "payloadType": "str",
+        "x": 70,
+        "y": 940,
+        "wires": [
+            [
+                "de7583e06da37fab"
+            ]
+        ]
+    },
+    {
+        "id": "d8abd846cd12c7ed",
+        "type": "debug",
+        "z": "52f81779ae177af1",
+        "name": "debug 17",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 1040,
+        "wires": []
+    }
+]
